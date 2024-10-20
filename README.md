@@ -6,11 +6,19 @@ This repository provides a starter template for creating applications using Next
 
 This template equips you with a foundational Next.js application integrated with AWS Amplify, streamlined for scalability and performance. It is ideal for developers looking to jumpstart their project with pre-configured AWS services like Cognito, AppSync, and DynamoDB.
 
+The template was forked from [aws-samples](https://github.com/aws-samples/amplify-next-template)
+
+
+
+
 ## Features
 
 - **Authentication**: Setup with Amazon Cognito for secure user authentication.
 - **API**: Ready-to-use GraphQL endpoint with AWS AppSync.
 - **Database**: Real-time database powered by Amazon DynamoDB.
+
+Frontend component
+- **Amplify UI Library** [React an open-source UI library](https://ui.docs.amplify.aws/react)
 
 ## Deploying to AWS
 
