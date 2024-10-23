@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Amplify } from "aws-amplify";
-import "./app.css";
+import "./globals.css";
 
 import { Authenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
 
     <html lang="en">
-      <body>      
+      <body> 
         <Authenticator>
           {children}
         </Authenticator>

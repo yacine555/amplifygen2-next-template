@@ -8,6 +8,40 @@ This template equips you with a foundational Next.js application integrated with
 
 The template was forked from [aws-samples](https://github.com/aws-samples/amplify-next-template)
 
+## Dependencies
+
+```
+npm i @mui/material @mui/x-data-grid @emotion/react @emotion/styled lucide-react numeral date-fns recharts react-dnd react-dnd-html5-backend gantt-task-react
+```
+
+These libraries include:
+- @mui/material and @emotion/react: For Material-UI components and styling.
+- @mui/x-data-grid is a component from the Material-UI library, designed for handling data grid
+- lucide-react: A React component for icons.
+- numeral: A library for formatting numbers.
+- date-fns: For working with date functions.
+- recharts: A chart library for React.
+- react-dnd and react-dnd-html5-backend: For drag-and-drop functionality.
+- gantt-task-react: A Gantt chart component for managing tasks.
+
+
+The type definitions
+```
+npm i -D @types/node @types/uuid @types/numeral
+```
+
+
+Prettier to format code. 
+```
+npm i -D prettier prettier-plugin-tailwindcss
+```
+
+```
+npm i -D tailwind-merge
+```
+
+ceate file .prettierrc file
+
 
 ## Features
 
