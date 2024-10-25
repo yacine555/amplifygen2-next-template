@@ -40,7 +40,16 @@ npm i -D prettier prettier-plugin-tailwindcss
 npm i -D tailwind-merge
 ```
 
-ceate file .prettierrc file
+create file .prettierrc file
+
+State management
+```
+npm i react-redux @reduxjs/toolkit redux-persist dotenv
+```
+- react-redux: Official React bindings for Redux. It lets your React components interact with the Redux store.
+- @reduxjs/toolkit: A set of tools to simplify Redux development, including built-in best practices and utilities for creating actions, reducers, and stores.
+- redux-persist: A library to persist and rehydrate the Redux store. This is useful if you want to save Redux state between page reloads or sessions.
+- dotenv: module to load environment variable
 
 
 ## Features
