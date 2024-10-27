@@ -2,6 +2,7 @@
 
 import { useAppDispatch, useAppSelector } from "@/app/redux";
 import { setIsSidebarCollapsed } from "@/state";
+import { useGetAuthUserQuery, useGetAccountsQuery, useGetProjectsQuery } from "@/state/api";
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -26,8 +27,12 @@ import {
 import { usePathname } from "next/navigation";
 
 const Sidebar = () => {
+  const [showAccounts, setShowAccounts] = useState(true);
   const [showProjects, setShowProjects] = useState(true);
   const [showPriority, setShowPriority] = useState(true);
+
+  const { data: accounts } = useGetAccountsQuery();
+  const { data: projects } = useGetProjectsQuery();
 
   const dispatch = useAppDispatch();
   const isSidebarCollapsed = useAppSelector(
@@ -80,13 +85,36 @@ const Sidebar = () => {
           <nav className="z-10 w-full">
             <SidebarLink icon={Home} label="Home" href="/" />
             <SidebarLink icon={Briefcase} label="Account" href="/dashboard/account" />
-            <SidebarLink icon={Briefcase} label="Timeline" href="/timeline" />
-            <SidebarLink icon={Search} label="Search" href="/search" />
-            <SidebarLink icon={Settings} label="Settings" href="/settings" />
-            <SidebarLink icon={User} label="Users" href="/users" />
-            <SidebarLink icon={Users} label="Teams" href="/teams" />
+            <SidebarLink icon={Briefcase} label="Timeline" href="/dashboard/timeline" />
+            <SidebarLink icon={Search} label="Search" href="/dashboard/search" />
+            <SidebarLink icon={Settings} label="Settings" href="/dashboard/settings" />
+            <SidebarLink icon={User} label="Users" href="/dashboard/users" />
+            <SidebarLink icon={Users} label="Teams" href="/dashboard/teams" />
           </nav>
 
+          {/* ACCOUNT LINKS */}
+
+          <button
+            onClick={() => setShowAccounts((prev) => !prev)}
+            className="flex w-full items-center justify-between px-8 py-3 text-gray-500"
+          >
+            <span className="">Accounts</span>
+            {showAccounts ? (
+              <ChevronUp className="h-5 w-5" />
+            ) : (
+              <ChevronDown className="h-5 w-5" />
+            )}
+          </button>
+          {/* ACCOUNT LIST */}
+          {showAccounts &&
+            accounts?.map((account) => (
+              <SidebarLink
+                key={account.id}
+                icon={Briefcase}
+                label={account.name}
+                href={`/dashboard/account/${account.id}`}
+              />
+            ))}
           {/* PROJECTS LINKS */}
           <button
             onClick={() => setShowProjects((prev) => !prev)}
@@ -99,8 +127,17 @@ const Sidebar = () => {
               <ChevronDown className="h-5 w-5" />
             )}
           </button>
-
+          
           {/* PROJECTS LIST */}
+          {showProjects &&
+            projects?.map((project) => (
+              <SidebarLink
+                key={project.id}
+                icon={Briefcase}
+                label={project.name}
+                href={`/dashboard/project/${project.id}`}
+              />
+            ))}
 
           {/* PRIORITIES LINKS */}
           <button

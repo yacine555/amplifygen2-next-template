@@ -1,8 +1,18 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { fetchAuthSession, getCurrentUser } from "aws-amplify/auth";
 
+
+export interface Account {
+  id: number;
+  name: string;
+  description?: string;
+  startDate?: string;
+  endDate?: string;
+}
+
 export interface Project {
   id: number;
+  accountId: number;
   name: string;
   description?: string;
   startDate?: string;
@@ -87,7 +97,7 @@ export const api = createApi({
     },
   }),
   reducerPath: "api",
-  tagTypes: ["Projects", "Tasks", "Users", "Teams"],
+  tagTypes: ["Accounts", "Projects", "Tasks", "Users", "Teams"],
   endpoints: (build) => ({
     getAuthUser: build.query({
       queryFn: async (_, _queryApi, _extraoptions, fetchWithBQ) => {
@@ -106,6 +116,18 @@ export const api = createApi({
           return { error: error.message || "Could not fetch user data" };
         }
       },
+    }),
+    getAccounts: build.query<Account[], void>({
+      query: () => "accounts",
+      providesTags: ["Accounts"],
+    }),
+    createAccount: build.mutation<Account, Partial<Account>>({
+      query: (account) => ({
+        url: "accounts",
+        method: "POST",
+        body: account,
+      }),
+      invalidatesTags: ["Projects"],
     }),
     getProjects: build.query<Project[], void>({
       query: () => "projects",
@@ -166,6 +188,8 @@ export const api = createApi({
 });
 
 export const {
+  useGetAccountsQuery,
+  useCreateAccountMutation,
   useGetProjectsQuery,
   useCreateProjectMutation,
   useGetTasksQuery,
