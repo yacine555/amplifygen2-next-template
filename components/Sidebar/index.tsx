@@ -83,7 +83,7 @@ const Sidebar = () => {
           </div>
           {/* NAVBAR LINKS */}
           <nav className="z-10 w-full">
-            <SidebarLink icon={Home} label="Home" href="/" />
+            <SidebarLink icon={Home} label="Home" href="/dashboard/home" />
             <SidebarLink icon={Briefcase} label="Account" href="/dashboard/account" />
             <SidebarLink icon={Briefcase} label="Timeline" href="/dashboard/timeline" />
             <SidebarLink icon={Search} label="Search" href="/dashboard/search" />
@@ -156,23 +156,23 @@ const Sidebar = () => {
               <SidebarLink
                 icon={AlertCircle}
                 label="Urgent"
-                href="/priority/urgent"
+                href="/dashboard/priority/urgent"
               />
               <SidebarLink
                 icon={ShieldAlert}
                 label="High"
-                href="/priority/high"
+                href="/dashboard/priority/high"
               />
               <SidebarLink
                 icon={AlertTriangle}
                 label="Medium"
-                href="/priority/medium"
+                href="/dashboard/priority/medium"
               />
-              <SidebarLink icon={AlertOctagon} label="Low" href="/priority/low" />
+              <SidebarLink icon={AlertOctagon} label="Low" href="/dashboard/priority/low" />
               <SidebarLink
                 icon={Layers3}
                 label="Backlog"
-                href="/priority/backlog"
+                href="/dashboard/priority/backlog"
               />
             </>
           )}

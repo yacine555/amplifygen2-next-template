@@ -7,7 +7,7 @@ import {
   useGetProjectsQuery,
   useGetTasksQuery,
 } from "@/state/api";
-import React from "react";
+import React, { useState } from "react";
 import { useAppSelector } from "../../redux";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import Header from "@/components/Header";
@@ -36,13 +36,23 @@ const taskColumns: GridColDef[] = [
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
 const HomePage = () => {
+
+
+  const [displayProject, setDisplayProject] = useState("1");
+
   const {
     data: tasks,
     isLoading: tasksLoading,
     isError: tasksError,
-  } = useGetTasksQuery({ projectId: parseInt("1") });
-  const { data: projects, isLoading: isProjectsLoading } =
-    useGetProjectsQuery();
+  } = useGetTasksQuery({ projectId: parseInt(displayProject) });
+
+  const { data: projects, isLoading: isProjectsLoading } = useGetProjectsQuery();
+
+  const handleDisplayProjectChange = (
+    event: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    setDisplayProject((prev) => ( event.target.value ));
+  };
 
   const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
 
@@ -93,7 +103,19 @@ const HomePage = () => {
 
   return (
     <div className="container h-full w-[100%] bg-gray-100 bg-transparent p-8">
-      <Header name="Project Management Dashboard" />
+
+      <header className="mb-4 flex items-center justify-between">
+        <Header name="Project Management Dashboard" />
+        <div className="relative inline-block w-64">
+          <select
+            className="focus:shadow-outline block w-full appearance-none rounded border border-gray-400 bg-white px-4 py-2 pr-8 leading-tight shadow hover:border-gray-500 focus:outline-none dark:border-dark-secondary dark:bg-dark-secondary dark:text-white"
+            value={displayProject}
+            onChange={handleDisplayProjectChange}
+          >
+            {projects.map(({ id, name }, index) => <option value={id} > Project {name}</option>)}
+          </select>
+        </div>
+      </header>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <div className="rounded-lg bg-white p-4 shadow dark:bg-dark-secondary">
           <h3 className="mb-4 text-lg font-semibold dark:text-white">
